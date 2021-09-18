@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SistemaFacturacionApi.Core.BaseModel
 {
-    public interface IBaseEntity
+    public interface IBaseEntity : IBase
     {
         DateTimeOffset? DeletedDate { get; set; }
         DateTimeOffset CreatedDate { get; set; }
