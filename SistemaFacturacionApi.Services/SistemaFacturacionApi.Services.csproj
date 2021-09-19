@@ -8,4 +8,8 @@
     <ProjectReference Include="..\SistemaFacturacion.BI\SistemaFacturacionApi.BI.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="IoC\" />
+  </ItemGroup>
+
 </Project>

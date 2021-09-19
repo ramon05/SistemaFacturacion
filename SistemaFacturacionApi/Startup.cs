@@ -7,7 +7,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using SistemaFacturacionApi.BI.Config;
 using SistemaFacturacionApi.Model.Context;
+using SistemaFacturacionApi.Model.IoC;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,10 +31,47 @@ namespace SistemaFacturacionApi
         {
             services.AddControllers();
 
+            #region App Settings
+            #endregion
+
+            #region CORS
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("MainPolicy",
+                      builder =>
+                      {
+                          builder
+                                 .AllowAnyHeader()
+                                 .AllowAnyMethod()
+                                 .AllowCredentials();
+
+                          //TODO: remove this line for production
+                          builder.SetIsOriginAllowed(x => true);
+                      });
+            });
+
+            #endregion
+
+            #region External Dependencies
+
             services.AddDbContext<SistemaFacturacionDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
+            services.configAutoMapper();
+
+            #endregion
+
+            #region Api Libraries
+            #endregion
+
+            #region App Registries
+
+            services.AddModelRegistry();
+
+            #endregion
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +87,8 @@ namespace SistemaFacturacionApi
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors("MainPolicy");
 
             app.UseEndpoints(endpoints =>
             {
