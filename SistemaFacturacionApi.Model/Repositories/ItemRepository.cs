@@ -7,7 +7,7 @@ using System.Text;
 namespace SistemaFacturacionApi.Model.Repositories
 {
     public interface IItemRepository : IBaseRepository<Item> { }
-    class ItemRepository : BaseRepository<Item>, IItemRepository
+    public class ItemRepository : BaseRepository<Item>, IItemRepository
     {
         public ItemRepository(SistemaFacturacionDbContext context) : base(context)
         {

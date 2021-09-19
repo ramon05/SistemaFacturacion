@@ -1,10 +1,11 @@
-﻿using System;
+﻿using SistemaFacturacionApi.Core.BaseModel;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace SistemaFacturacionApi.BI.Dtos
 {
-    public class ItemDto
+    public class ItemDto : BaseEntityDto
     {
         public int Quantity { get; set; }
         public float Price { get; set; }

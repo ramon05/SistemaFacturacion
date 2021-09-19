@@ -1,10 +1,11 @@
-﻿using System;
+﻿using SistemaFacturacionApi.Core.BaseModel;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace SistemaFacturacionApi.BI.Dtos
 {
-    public class OrderDto
+    public class OrderDto : BaseEntityDto
     {
         public string NumberOrder { get; set; }
         public DateTime DateOrder { get; set; }

@@ -1,10 +1,11 @@
-﻿using System;
+﻿using SistemaFacturacionApi.Core.BaseModel;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace SistemaFacturacionApi.BI.Dtos
 {
-    public class UserDto
+    public class UserDto : BaseEntityDto
     {
         public string Name { get; set; }
         public string LastName { get; set; }

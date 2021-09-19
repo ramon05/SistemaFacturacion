@@ -31,12 +31,11 @@ namespace SistemaFacturacionApi.Services.Services
     {
         public IMapper _mapper { get; }
         protected readonly IBaseRepository<TEntity> _repository;
-        protected IValidator<TDto> _validator;
-
-        public BaseService(IMapper mapper, IBaseRepository<TEntity> repository, IValidator<TDto> validator)
+        protected readonly IValidator<TDto> _validator;
+        public BaseService(IBaseRepository<TEntity> repository, IMapper mapper, IValidator<TDto> validator)
         {
-            _mapper = mapper;
             _repository = repository;
+            _mapper = mapper;
             _validator = validator;
         }
 
@@ -45,26 +44,22 @@ namespace SistemaFacturacionApi.Services.Services
             var list = query.ProjectTo<TDto>(_mapper.ConfigurationProvider);
             return await list.ToListAsync();
         }
-
         public virtual IQueryable<TEntity> AsQuery()
         {
             return _repository.Query();
         }
-
-        public async Task<IEnumerable<TDto>> GetAllAsync()
+        public virtual async Task<IEnumerable<TDto>> GetAllAsync()
         {
             var result = await _repository.Query().ToListAsync();
             var dtos = _mapper.Map<IEnumerable<TDto>>(result);
             return dtos;
         }
-
         public virtual async Task<TDto> GetByIdAsync(int id)
         {
             var entity = await _repository.Get(id);
             var dto = _mapper.Map<TDto>(entity);
             return dto;
         }
-
         public virtual async Task<IEntityOperationResult<TDto>> AddAsync(TDto dto)
         {
             var validationResult = _validator.Validate(dto);
@@ -79,7 +74,6 @@ namespace SistemaFacturacionApi.Services.Services
             var result = dto.ToOperationResult();
             return result;
         }
-
         public virtual async Task<IEntityOperationResult<TDto>> UpdateAsync(int id, TDto dto)
         {
             var validationResult = _validator.Validate(dto);
@@ -99,7 +93,6 @@ namespace SistemaFacturacionApi.Services.Services
             var result = dto.ToOperationResult();
             return result;
         }
-
         public virtual async Task<IEntityOperationResult<TDto>> DeleteByIdAsync(int id)
         {
             var entity = await _repository.Get(id);
