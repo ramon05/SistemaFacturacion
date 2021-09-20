@@ -8,8 +8,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using SistemaFacturacionApi.BI.Config;
+using SistemaFacturacionApi.Config;
 using SistemaFacturacionApi.Model.Context;
 using SistemaFacturacionApi.Model.IoC;
+using SistemaFacturacionApi.Services.IoC;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,6 +57,8 @@ namespace SistemaFacturacionApi
 
             #region External Dependencies
 
+            services.AddControllers(mvcOptions =>
+                mvcOptions.EnableEndpointRouting = false).configFluentValidation();
             services.AddDbContext<SistemaFacturacionDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
@@ -64,12 +68,16 @@ namespace SistemaFacturacionApi
             #endregion
 
             #region Api Libraries
+
+             services.ConfigOdata();
+             services.ConfigSwagger();
+
             #endregion
 
             #region App Registries
 
             services.AddModelRegistry();
-
+            services.AddServiceRegistry();
             #endregion
 
         }
@@ -84,16 +92,20 @@ namespace SistemaFacturacionApi
 
             app.UseHttpsRedirection();
 
+            app.UseAppSwagger();
+
             app.UseRouting();
 
             app.UseAuthorization();
 
             app.UseCors("MainPolicy");
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseMvc(routeBuilder => routeBuilder.UseAppOData());
+
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapControllers();
+            //});
         }
     }
 }

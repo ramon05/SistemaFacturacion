@@ -3,9 +3,9 @@ using SistemaFacturacionApi.BI.Dtos;
 
 namespace SistemaFacturacionApi.BI.Validations
 {
-    public class CustomerValidator : AbstractValidator<CustomerDto>
+    public class UserValidator : AbstractValidator<UserDto>
     {
-        public CustomerValidator()
+        public UserValidator()
         {
             RuleFor(x => x.Name)
                 .NotEmpty()

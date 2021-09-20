@@ -1,6 +1,7 @@
 ﻿
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
+using SistemaFacturacionApi.BI.Validations;
 using SistemaFacturacionApi.Model.Entities;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace SistemaFacturacionApi.BI.Config
             builder.AddFluentValidation(x =>
             {
                 x.AutomaticValidationEnabled = false;
-                x.RegisterValidatorsFromAssemblyContaining<Customer>();
+                x.RegisterValidatorsFromAssemblyContaining<CustomerValidator>();
             });
 
             return builder;

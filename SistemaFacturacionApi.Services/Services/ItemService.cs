@@ -13,8 +13,8 @@ namespace SistemaFacturacionApi.Services.Services
     public class ItemService : BaseService<Item, ItemDto>, IItemService
     {
         public ItemService(
+            IItemRepository repository,
             IMapper mapper,
-            IItemRepository repository, 
             IValidator<ItemDto> validator) : base(repository, mapper, validator)
         {
 

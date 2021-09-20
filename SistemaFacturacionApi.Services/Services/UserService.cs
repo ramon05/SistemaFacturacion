@@ -14,7 +14,7 @@ namespace SistemaFacturacionApi.Services.Services
     public class UserService : BaseService<User, UserDto>, IUserService
     {
         public UserService(
-            UserRepository repository, 
+            IUserRepository repository, 
             IMapper mapper, 
             IValidator<UserDto> validator) : base(repository, mapper, validator)
         {

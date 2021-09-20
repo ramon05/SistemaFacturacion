@@ -14,7 +14,7 @@ namespace SistemaFacturacionApi.Services.Services
     public class CustomerService : BaseService<Customer, CustomerDto>, ICustomerService
     {
         public CustomerService(
-            CustomerRepository repository, 
+            ICustomerRepository repository, 
             IMapper mapper, 
             IValidator<CustomerDto> validator) : base(repository, mapper, validator)
         {

@@ -14,7 +14,7 @@ namespace SistemaFacturacionApi.Services.Services
     public class OrderService : BaseService<Order, OrderDto>, IOrderService
     {
         public OrderService(
-            OrderRepository repository, 
+            IOrderRepository repository, 
             IMapper mapper, 
             IValidator<OrderDto> validator) : base(repository, mapper, validator)
         {

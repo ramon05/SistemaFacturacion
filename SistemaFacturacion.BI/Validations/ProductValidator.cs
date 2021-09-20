@@ -3,13 +3,13 @@ using SistemaFacturacionApi.BI.Dtos;
 
 namespace SistemaFacturacionApi.BI.Validations
 {
-    public class CustomerValidator : AbstractValidator<CustomerDto>
+    public class ProductValidator : AbstractValidator<ProductDto>
     {
-        public CustomerValidator()
+        public ProductValidator()
         {
             RuleFor(x => x.Name)
                 .NotEmpty()
-                .WithMessage("User's Name is required");
+                .WithMessage("Product's Name is required");
         }
     }
 }
