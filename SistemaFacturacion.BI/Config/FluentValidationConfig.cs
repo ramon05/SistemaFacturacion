@@ -2,10 +2,6 @@
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
 using SistemaFacturacionApi.BI.Validations;
-using SistemaFacturacionApi.Model.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SistemaFacturacionApi.BI.Config
 {

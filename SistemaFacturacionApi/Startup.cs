@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using SistemaFacturacionApi.BI.Config;
 using SistemaFacturacionApi.Config;
+using SistemaFacturacionApi.Core.Settings;
 using SistemaFacturacionApi.Model.Context;
 using SistemaFacturacionApi.Model.IoC;
 using SistemaFacturacionApi.Services.IoC;
@@ -31,10 +32,11 @@ namespace SistemaFacturacionApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
 
             #region App Settings
             #endregion
+
+            services.Configure<JwtSettings>(Configuration.GetSection("JwtSettings"));
 
             #region CORS
 
@@ -64,20 +66,23 @@ namespace SistemaFacturacionApi
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
             services.configAutoMapper();
+            services.configSerilog();
 
             #endregion
 
             #region Api Libraries
 
-             services.ConfigOdata();
-             services.ConfigSwagger();
-
+            services.ConfigJwtAuth(Configuration);
+            services.ConfigSwagger();
+            services.ConfigOdata();
+            
             #endregion
 
             #region App Registries
 
             services.AddModelRegistry();
             services.AddServiceRegistry();
+
             #endregion
 
         }
@@ -95,6 +100,8 @@ namespace SistemaFacturacionApi
             app.UseAppSwagger();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

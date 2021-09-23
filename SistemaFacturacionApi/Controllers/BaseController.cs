@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.OData;
 using Microsoft.AspNet.OData.Query;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SistemaFacturacionApi.Core.BaseModel;
@@ -14,6 +15,7 @@ using System.Threading.Tasks;
 namespace SistemaFacturacionApi.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class BaseController<TEntity, TDto> : ControllerBase
         where TEntity : IBase
