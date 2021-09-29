@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SistemaFacturacionApi.Model.Context;
 
 namespace SistemaFacturacionApi.Model.Migrations
 {
     [DbContext(typeof(SistemaFacturacionDbContext))]
-    partial class SistemaFacturacionDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210929111116_addColumnUser")]
+    partial class addColumnUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -10,6 +10,12 @@ namespace SistemaFacturacionApi.BI.Validations
             RuleFor(x => x.Quantity)
                 .NotEmpty()
                 .WithMessage("Order's Quantity is required");
+            RuleFor(x => x.OrderId)
+                .NotEmpty()
+                .WithMessage("Item's Order is required");
+            RuleFor(x => x.ProductId)
+                .NotEmpty()
+                .WithMessage("Item's Product is required");
         }
     }
 }

@@ -8,8 +8,8 @@ namespace SistemaFacturacionApi.BI.Dtos
     public class CustomerDto : BaseEntityDto
     {
         public string Name { get; set; }
-        public int LastName { get; set; }
-        public int Direction { get; set; }
-        public int Telephone { get; set; }
+        public string LastName { get; set; }
+        public string Direction { get; set; }
+        public string Telephone { get; set; }
     }
 }
